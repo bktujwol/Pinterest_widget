@@ -1,0 +1,70 @@
+﻿=== Pinterest Widget ===
+Contributors: ujw0l
+Donate link:
+Tags: widget,pinterest, social networking, pinterest feed
+Requires at least: 2.8	+
+Tested up to: 4.9
+Stable tag: 2.0.0
+License: GPLv2
+
+Plugin that provides users option to display Pinterest Widget on the Sidebar or Footer	
+
+
+== Description ==
+
+This plugin lets you to display Pinterest widget on sidebar with the themes that supports sidebar and Footer
+
+It display random public feeds from your pins from pinterest
+
+You have choice between 1, 3 and 6 feeds display options
+
+
+Note:     
+
+
+== Installation ==
+
+1. Upload the folder `Pinterest-Widget` and its contents to the `/wp-content/plugins/` directory or use the wordpress plugin installer
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. A new "Pinterest Widget" will be available under Appearance > Widgets, where you can add it to your sidebar
+  
+
+
+= Uninstall =
+
+1. Deactivate Pinterest Widget in the 'Plugins' menu in Wordpress.
+2. After Deactivation a 'Delete' link appears below the plugin name, follow the link and confim with 'Yes, Delete these files'.
+3. This will delete all the plugin files from the server as well as erasing all options the plugin has stored in the database.
+
+== Frequently Asked Questions ==
+
+= Why can't I customize it or display more feeds? =
+
+This is first release I wish to make it more customizable on future releases please provide feedback so i will know what are you looking for.
+
+
+= Where can I use this plugin? =
+
+You can use this plugin to display images on sidebar or Footer.
+
+== Screenshots ==
+
+1.	Screenshot of the front end  with one feed
+2.  Screenshot of front end with 3 feeds
+3.  Screenshot of front end with 6 feed 
+4.	Screen shot of Backend 
+
+
+
+== Changelog ==
+
+= 1.0 =
+* This is first stable version 
+* Many upgrades to follow
+
+= 2.0 =
+* User have options to display 1,3 or 6 feeds
+* Users can now display pins from boards too only user
+* Better graphics
+
+
