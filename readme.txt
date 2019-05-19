@@ -16,7 +16,7 @@ This plugin lets you to display Pinterest widget on sidebar with the themes that
 
 It display random public feeds from your pins from pinterest
 
-You have choice between 1, 3 and 6 feeds display options
+You now can choose any numbers of pin to display
 
 
 Note:     
@@ -65,9 +65,10 @@ You can use this plugin to display images on sidebar or Footer.
 * Users can now display pins from boards too only user
 * Better graphics
 
-= 2.0 =
+= 3.0 =
 * Widget style pins
 * Better follow me button
+* Can choose number of pins to display
 
 
 
