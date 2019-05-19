@@ -3,7 +3,7 @@ Contributors: ujw0l
 Donate link:
 Tags: widget,pinterest, social networking, pinterest feed
 Requires at least: 2.8	+
-Tested up to: 4.9
+Tested up to: 5.2.1
 Stable tag: 2.0.0
 License: GPLv2
 
