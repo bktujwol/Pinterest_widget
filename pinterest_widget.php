@@ -3,9 +3,10 @@
 Plugin Name: Pinterest Widget
 Plugin URI: 
 Description: Pinterest RSS Widget
-Version: 2.0.0
+Version: 3.0.0
 Author: Ujwol Bastakoti
 Author URI: 
+text-domain: pinterest-widget
 License: GPLv2
 */
 
@@ -16,8 +17,9 @@ class pinterest_widget extends WP_Widget{
 			parent::__construct(
 					'pinterest_widget', // Base ID
 					'Pinterest  Widget', // Name
-					array( 'description' => __( 'Pinterest Fedd Widget', 'text_domain' ), ) // Args
+					array( 'description' => __( 'Pinterest Fedd Widget', 'pinterest-widget' ), ) // Args
 			);
+			
 		}
 		
 		//function to detemine default number of pin to display
@@ -38,7 +40,7 @@ class pinterest_widget extends WP_Widget{
 					$title = $instance[ 'title' ];
 				}
 			else {
-					$title = __( 'Pinterest Feed Widget', 'text_domain' );
+					$title = __( 'Pinterest Feed Widget', 'pinterest-widget' );
 				}
 		?>
 		    <p>
@@ -57,12 +59,9 @@ class pinterest_widget extends WP_Widget{
 				<input class="widefat" id="<?php echo $this->get_field_id( 'pinterest_pin_board' ); ?>" name="<?php echo $this->get_field_name( 'pinterest_pin_board' ); ?>" type="text" value="<?php echo esc_attr( $instance['pinterest_pin_board' ] ); ?>" />
 		    </p>
 		    <p>
-				<label for="<?php echo $this->get_field_id( 'pinterest_pin_count' ); ?>"><?php _e( 'No of pins to be displayed:' ); ?></label> 
-        		    <select class="widefat"  id="<?php echo $this->get_field_id('pinterest_pin_count'); ?>" name="<?php echo $this->get_field_name( 'pinterest_pin_count' ); ?> "   style="width:120px !important;">
-					  <option <?php $this->default_pin_count("1",$instance['pinterest_pin_count'] ); ?>  value="1">1</option>
-					  <option <?php $this->default_pin_count("3", $instance['pinterest_pin_count'] ); ?>  value="3" >3</option>
-					  <option <?php $this->default_pin_count("6", $instance['pinterest_pin_count'] ); ?>  value="6">6</option>
-					</select> 
+				<label for="<?php echo $this->get_field_id( 'pinterest_pin_count' ); ?>"><?php _e( 'No of pins to be displayed:' ); ?></label>
+				<?php   if(1 < $instance['pinterest_pin_count' ] ) : $pinCount= esc_attr( $instance['pinterest_pin_count' ] ); else: $pinCount=  '1'; endif; ?> 
+				<input class="widefat" id="<?php echo $this->get_field_id( 'pinterest_pin_count' ); ?>" name="<?php echo $this->get_field_name( 'pinterest_pin_count' ); ?>" type="number" min='1' value="<?php echo esc_attr( $instance['pinterest_pin_count' ] ); ?>" />
 		    </p>
 		     <p>
         		    <ol>
@@ -115,9 +114,8 @@ class pinterest_widget extends WP_Widget{
 		}
 		
 		//function to resgister css and javascript file
-		public function pinterest_widget_register_custom_js_css()
-		{
-		    wp_enqueue_script('jquery');
+		public function pinterest_widget_register_custom_js_css(){
+
 		    wp_enqueue_style('pinterestCss', plugins_url('css/pinterest_rss.css',__FILE__ ));
 		    wp_enqueue_script('pinterestJs', plugins_url('js/pinterest-widget.js',__FILE__ ));
 		}
@@ -132,9 +130,8 @@ class pinterest_widget extends WP_Widget{
 		 */
 		public function widget( $args, $instance ) {
 		  
-		    $this->pinterest_widget_register_custom_js_css();
-		    add_action( 'wp_enqueue_scripts','pinterest_widget_register_custom_js_css');
-			
+		   $this->pinterest_widget_register_custom_js_css();
+		    
 			extract( $args );
 			$title = apply_filters( 'widget_title', $instance['title'] );
 		
@@ -144,35 +141,31 @@ class pinterest_widget extends WP_Widget{
 			    echo $before_title . $title . $after_title;
 			
 			    //function to fetch feeds from site based oon user input
-			    $feed = $this->process_pinterest_feed($instance['pinterest_username'],$instance['pinterest_pin_board']);
+				$feed = $this->process_pinterest_feed($instance['pinterest_username'],$instance['pinterest_pin_board']);
+				
+			     $pinCount = $pinCount =  1 <  $instance['pinterest_pin_count']  ?  $instance['pinterest_pin_count'] : '1';
+				 $buttonStyle = 'text-decoration:none;padding:5px;box-shadow:1px 2px rgba(255,0,0,0.3);background-color:rgba(255,0,0,0.7);; border-radius:5px;color:rgba(255,255,255,1);font-size:20px;';
+				 ?>
+<div id='pinterest_widget_feed'  class='pinterest_feeds' data-pin-count ='<?=$instance['pinterest_pin_count']?>' >
+<fieldset style="border:2px dotted  rgba(209, 2, 29,0.5)">
+	<legend align="center"  >
+		<a id="pinterest_widget_follow" style="<?=$buttonStyle?>"   class='pinterest_link' href='http://pinterest.com/"<?=$instance['pinterest_username']?>' target='_blank'><i><?= _e( 'follow me','pinterest-widget')?> @ </i><?=esc_html($instance['pinterest_username'])?></a>
+	</legend>
+	
+				 <?php
 			    
-			   
-			         $i = abs(rand(0, $feed->get_item_quantity()));
-			    
-        			    if($i>= $feed->get_item_quantity()-6)
-        			    {
-        			        $i= 3;
-        			    }
-        			    
-			         $a=0;
-			    
-			   
-			     $pinCount = $instance['pinterest_pin_count']-1;
-			 
-			
-			
-			
-			     echo "<ol  class='pinterest_feeds'  pinCount ='".$instance['pinterest_pin_count']."'  style='list-style-type:circle !important;'>";
-				foreach($feed->get_items($i) as $item)
-				{
-					 	
-					 echo "<li  class='feed_item'  style='list-style-type:none!important;'>".$item->get_content()."<span id='pin_feed_pic_".$pinCount."'>".$item->get_title()."</span></li>";
-			         if(++$a > $pinCount) break;
-					
-				}
-			echo "</ol>";
+				$a = 0;
+				 foreach($feed->get_items() as $item):
+					 echo "<div  class='feed_item'  style='display:none;' data-feed-title = ".$item->get_title().">".$item->get_content()."</div>";
+			         if(++$a >= $pinCount) break;
+				 endforeach;
+			?>
 		
-		    echo "<div class='pinterest__follow_icon'><a class='pinterest_link' href='http://pinterest.com/".$instance['pinterest_username']."' target='_blank'><img class='item-6' src='". plugins_url('images/pinterest.png', __FILE__)."' title='pinterest'/></a></div>";
+		</fieldset>
+		</div>
+		
+
+			<?php
 			echo $after_widget;
 		  
 		}//end of function widget

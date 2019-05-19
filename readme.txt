@@ -3,8 +3,8 @@ Contributors: ujw0l
 Donate link:
 Tags: widget,pinterest, social networking, pinterest feed
 Requires at least: 2.8	+
-Tested up to: 4.9
-Stable tag: 2.0.0
+Tested up to: 5.2.1
+Stable tag: 3.0.0
 License: GPLv2
 
 Plugin that provides users option to display Pinterest Widget on the Sidebar or Footer	
@@ -16,7 +16,7 @@ This plugin lets you to display Pinterest widget on sidebar with the themes that
 
 It display random public feeds from your pins from pinterest
 
-You have choice between 1, 3 and 6 feeds display options
+You now can choose any numbers of pin to display
 
 
 Note:     
@@ -49,10 +49,8 @@ You can use this plugin to display images on sidebar or Footer.
 
 == Screenshots ==
 
-1.	Screenshot of the front end  with one feed
-2.  Screenshot of front end with 3 feeds
-3.  Screenshot of front end with 6 feed 
-4.	Screen shot of Backend 
+1.	Screenshot of the front end 
+2.	Screen shot of Backend 
 
 
 
@@ -66,5 +64,11 @@ You can use this plugin to display images on sidebar or Footer.
 * User have options to display 1,3 or 6 feeds
 * Users can now display pins from boards too only user
 * Better graphics
+
+= 3.0 =
+* Widget style pins
+* Better follow me button
+* Can choose number of pins to display
+
 
 
