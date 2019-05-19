@@ -3,7 +3,7 @@
 Plugin Name: Pinterest Widget
 Plugin URI: 
 Description: Pinterest RSS Widget
-Version: 2.0.0
+Version: 3.0.0
 Author: Ujwol Bastakoti
 Author URI: 
 text-domain: pinterest-widget
@@ -17,7 +17,7 @@ class pinterest_widget extends WP_Widget{
 			parent::__construct(
 					'pinterest_widget', // Base ID
 					'Pinterest  Widget', // Name
-					array( 'description' => __( 'Pinterest Fedd Widget', 'text_domain' ), ) // Args
+					array( 'description' => __( 'Pinterest Fedd Widget', 'pinterest-widget' ), ) // Args
 			);
 			
 		}
@@ -40,7 +40,7 @@ class pinterest_widget extends WP_Widget{
 					$title = $instance[ 'title' ];
 				}
 			else {
-					$title = __( 'Pinterest Feed Widget', 'text_domain' );
+					$title = __( 'Pinterest Feed Widget', 'pinterest-widget' );
 				}
 		?>
 		    <p>

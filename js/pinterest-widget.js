@@ -1,31 +1,17 @@
-'user strict';
 
-class pinterestWidget{
-
-	constructor(){
-		
-		this.removeWhiteSpaces(this.setUpFeeds());
-	}
-	
-	
-	setUpFeeds(){
-		
+		var containerWidth = document.getElementById('pinterest_widget_feed').offsetWidth;
 		var allFeeds =  document.getElementById('pinterest_widget_feed').getElementsByClassName('feed_item');
-		var pinFeedCount = document.getElementById('pinterest_widget_feed').getAttribute('data-pin-count');
+		var pinFeedCount = parseInt(document.getElementById('pinterest_widget_feed').getAttribute('data-pin-count'));
 		var feedArray = Array();
+		
 	
-		switch(pinFeedCount){
-			case "1":
-					var colWidth = 	'98%';
-					break;
-			case "2":	
-					var colWidth = 	'49%';
-					break;	
-		  case "3":
-					var colWidth = 	'32.3%';
-			default:
-					var colWidth = 	'32.3%';					
-		}
+		
+			if(pinFeedCount === 1){	
+				var colWidth = 	'98%';	
+				 
+			} else{
+				colWidth = 	'48%';
+			}
 
 		for(var i in allFeeds){
 			if(i >= 0 ){
@@ -55,14 +41,3 @@ class pinterestWidget{
 			}
 			
 		}
-
-		return feedArray;
-	}
-
-	 removeWhiteSpaces(feedArray){
-
-		
-	 }
-	}
-
-	new  pinterestWidget();
