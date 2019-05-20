@@ -149,7 +149,7 @@ class pinterest_widget extends WP_Widget{
 <div id='pinterest_widget_feed'  class='pinterest_feeds' data-pin-count ='<?=$instance['pinterest_pin_count']?>' >
 <fieldset style="border:2px dotted  rgba(209, 2, 29,0.5)">
 	<legend align="center"  >
-		<a id="pinterest_widget_follow" style="<?=$buttonStyle?>"   class='pinterest_link' href='http://pinterest.com/"<?=$instance['pinterest_username']?>' target='_blank'><i><?= _e( 'follow me','pinterest-widget')?> @ </i><?=esc_html($instance['pinterest_username'])?></a>
+		<a id="pinterest_widget_follow" style="<?=$buttonStyle?>"   class='pinterest_link' href='http://pinterest.com/<?=$instance['pinterest_username']?>' target='_blank'><i><?= _e( 'follow me','pinterest-widget')?> @ </i><?=esc_html($instance['pinterest_username'])?></a>
 	</legend>
 	
 				 <?php
