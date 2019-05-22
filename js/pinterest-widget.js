@@ -47,7 +47,7 @@
 				allFeeds[i].style.display = 'inline-grid';
 			}
 
-			console.log(feedContainer.parentElement);
+
 			feedContainer.parentElement.style.display = '';
 		}
 	var feedDiv = feedContainer.getElementsByClassName('feed_item')[0];;

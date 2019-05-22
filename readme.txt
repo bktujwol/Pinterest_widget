@@ -70,5 +70,9 @@ You can use this plugin to display images on sidebar or Footer.
 * Better follow me button
 * Can choose number of pins to display
 
+= 3.2.0 =
+* Masonry used for pin placement
+* Minor bug fixes
+
 
 
