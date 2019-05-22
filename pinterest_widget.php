@@ -116,8 +116,10 @@ class pinterest_widget extends WP_Widget{
 		//function to resgister css and javascript file
 		public function pinterest_widget_register_custom_js_css(){
 
+			wp_enqueue_script('masonry');
+			wp_enqueue_script('imagesloaded');
 		    wp_enqueue_style('pinterestCss', plugins_url('css/pinterest_rss.css',__FILE__ ));
-		    wp_enqueue_script('pinterestJs', plugins_url('js/pinterest-widget.js',__FILE__ ));
+		    wp_enqueue_script('pinterestJs', plugins_url('js/pinterest-widget.js',__FILE__ ),array('masonry','imagesloaded'),'', true);
 		}
 		
 		/**
@@ -146,23 +148,24 @@ class pinterest_widget extends WP_Widget{
 			     $pinCount = $pinCount =  1 <  $instance['pinterest_pin_count']  ?  $instance['pinterest_pin_count'] : '1';
 				 $buttonStyle = 'text-decoration:none;padding:5px;box-shadow:1px 2px rgba(255,0,0,0.3);background-color:rgba(255,0,0,0.7);; border-radius:5px;color:rgba(255,255,255,1);font-size:20px;';
 				 ?>
-<div id='pinterest_widget_feed'  class='pinterest_feeds' data-pin-count ='<?=$instance['pinterest_pin_count']?>' >
-<fieldset style="border:2px dotted  rgba(209, 2, 29,0.5)">
-	<legend align="center"  >
+	<fieldset class="pinterest_feed_fieldset" style="border:2px dotted  rgba(209, 2, 29,0.5);display:none;">
+	<legend align="center" style="overflow:hidden;"  >
 		<a id="pinterest_widget_follow" style="<?=$buttonStyle?>"   class='pinterest_link' href='http://pinterest.com/<?=$instance['pinterest_username']?>' target='_blank'><i><?= _e( 'follow me','pinterest-widget')?> @ </i><?=esc_html($instance['pinterest_username'])?></a>
-	</legend>
+	</legend>			 
+<div id='pinterest_widget_feed'  class='pinterest_feeds' data-pin-count ='<?=$instance['pinterest_pin_count']?>' >
+
 	
 				 <?php
 			    
 				$a = 0;
 				 foreach($feed->get_items() as $item):
-					 echo "<div  class='feed_item'  style='display:none;' data-feed-title = ".$item->get_title().">".$item->get_content()."</div>";
+					 echo "<div  class='feed_item'   data-feed-title = ".$item->get_title().">".$item->get_content()."</div>";
 			         if(++$a >= $pinCount) break;
 				 endforeach;
 			?>
-		
-		</fieldset>
 		</div>
+		</fieldset>
+		
 		
 
 			<?php
