@@ -1,11 +1,11 @@
 <?php
  /*
 Plugin Name: Pinterest Widget
-Plugin URI: 
+Plugin URI: https://github.com/ujw0l/Pinterest_widget
 Description: Pinterest RSS Widget
-Version: 3.0.0
+Version: 3.1.0
 Author: Ujwol Bastakoti
-Author URI: 
+Author URI: http://ujw0l.github.io/
 text-domain: pinterest-widget
 License: GPLv2
 */

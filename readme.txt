@@ -1,10 +1,9 @@
 ﻿=== Pinterest Widget ===
 Contributors: ujw0l
-Donate link:
 Tags: widget,pinterest, social networking, pinterest feed
 Requires at least: 2.8	+
-Tested up to: 5.2.1
-Stable tag: 3.0.0
+Tested up to: 5.5
+Stable tag: 3.1.0
 License: GPLv2
 
 Plugin that provides users option to display Pinterest Widget on the Sidebar or Footer	
