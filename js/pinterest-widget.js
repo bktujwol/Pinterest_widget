@@ -1,3 +1,5 @@
+		
+	window.addEventListener('load', ()=>{
 		var feedContainer = document.getElementById('pinterest_widget_feed');
 		var allFeeds =  feedContainer.getElementsByClassName('feed_item');
 		var pinFeedCount = parseInt(feedContainer.getAttribute('data-pin-count'));
@@ -42,14 +44,53 @@
 				feedLink.appendChild(img);	
 				allFeeds[i].appendChild(feedLink);
 				allFeeds[i].setAttribute('data-feed-width',colWidth);
-				allFeeds[i].setAttribute("onmouseleave","this.style.zIndex='100';this.style.display='';this.style.width=this.getAttribute('data-feed-width');");
-				allFeeds[i].setAttribute("onmouseover","this.style.width ='94%';this.style.zIndex='500';this.style.display='block';");
-				allFeeds[i].style.display = 'inline-grid';
+				let feedImg = allFeeds[i].querySelector('a').querySelector('img');
+				
+				let feedContainer = allFeeds[i].parentElement;
+				
+
+				allFeeds[i].addEventListener('mouseleave',event=>{
+
+			
+					feedImg.style.zIndex='100';
+					feedImg.style.width=feedImg.getAttribute('data-mas-wd')+'px';
+					feedImg.style.height=feedImg.getAttribute('data-mas-ht')+'px';
+					feedImg.style.marginLeft = feedImg.getAttribute('data-mas-ml')+'px';
+				});
+				allFeeds[i].addEventListener('mouseover',event=>{
+			
+					let htWtRatio = feedImg.offsetHeight/feedImg.offsetWidth;
+					
+					feedImg.style.zIndex='500';
+					feedImg.style.display='block';
+
+		
+				if(null == feedImg.getAttribute('data-mas-ht') && null == feedImg.getAttribute('data-mas-wd')){
+					feedImg.setAttribute('data-mas-ht',feedImg.offsetHeight);
+					feedImg.setAttribute('data-mas-wd',feedImg.offsetWidth);
+					feedImg.setAttribute('data-mas-ml',feedImg.style.marginLeft);
+				}
+						
+				feedImg.style.width=feedContainer.offsetWidth+'px';
+				feedImg.style.height= (feedContainer.offsetWidth *htWtRatio)+'px';	
+				});
+				
 			}
 
 
 			feedContainer.parentElement.style.display = '';
 		}
+
+
+
+
+		const mas = new jsMasonry('.pinterest_feeds',{
+			elSelector:'img',
+			elMargin : 2,
+		})	
+
+});
+	/*	
 	var feedDiv = feedContainer.getElementsByClassName('feed_item')[0];;
 	imagesLoaded( document.querySelector('#pinterest_widget_feed'), function( instance ) {
 		var msnry = new Masonry( document.querySelector('#pinterest_widget_feed'), {
@@ -60,5 +101,5 @@
 		  });
 		  
 	  });
-
+*/
 				

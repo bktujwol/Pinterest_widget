@@ -115,12 +115,12 @@ class pinterest_widget extends WP_Widget{
 		
 		//function to resgister css and javascript file
 		public function pinterest_widget_register_custom_js_css(){
-			wp_enqueue_script('masonry');
-			wp_enqueue_script('imagesloaded');
-		    wp_enqueue_style('pinterestCss', plugins_url('css/pinterest_rss.css',__FILE__ ));
-		    wp_enqueue_script('pinterestJs', plugins_url('js/pinterest-widget.js',__FILE__ ),array('masonry','imagesloaded'),'', true);
+			wp_enqueue_style( 'dashicons' );
+			wp_enqueue_style('pinterestCss', plugins_url('css/pinterest_rss.css',__FILE__ ));
+			wp_enqueue_script('masonaryJs', plugins_url('js/js-masonry.js',__FILE__ ),array(),'', true);
+			wp_enqueue_script('pinterestJs', plugins_url('js/pinterest-widget.js',__FILE__ ),array('masonaryJs','masonry','imagesloaded'),'', true);
+			
 		}
-		
 		/**
 		 * Front-end display of widget.
 		 *
@@ -145,11 +145,11 @@ class pinterest_widget extends WP_Widget{
 				$feed = $this->process_pinterest_feed($instance['pinterest_username'],$instance['pinterest_pin_board']);
 				
 			     $pinCount =  1 <  $instance['pinterest_pin_count']  ?  $instance['pinterest_pin_count'] : '1';
-				 $buttonStyle = 'text-decoration:none;padding:5px;box-shadow:1px 2px rgba(255,0,0,0.3);background-color:rgba(255,0,0,0.7);; border-radius:5px;color:rgba(255,255,255,1);font-size:20px;';
+				 $buttonStyle = 'text-decoration:none;padding:5px;color:rgba(255,0,0,1); border-radius:2px;background-color:rgba(255,255,255,1);font-size:30px;';
 				 ?>
 	<fieldset class="pinterest_feed_fieldset" style="border:2px dotted  rgba(209, 2, 29,0.5);display:none;">
 	<legend align="center" style="overflow:hidden;"  >
-		<a id="pinterest_widget_follow" style="<?=$buttonStyle?>"   class='pinterest_link' href='http://pinterest.com/<?=$instance['pinterest_username']?>' target='_blank'><i><?= _e( 'follow me','pinterest-widget')?> @ </i><?=esc_html($instance['pinterest_username'])?></a>
+		<a id="pinterest_widget_follow" style="<?=$buttonStyle?>"   title="<?=__('Click here to follow me','pinterest-widget')?>" class='pinterest_link' href='http://pinterest.com/<?=$instance['pinterest_username']?>' target='_blank'></a>
 	</legend>			 
 <div id='pinterest_widget_feed'  class='pinterest_feeds' data-pin-count ='<?=$pinCount?>' >
 
