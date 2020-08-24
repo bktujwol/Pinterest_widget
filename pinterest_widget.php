@@ -3,7 +3,7 @@
 Plugin Name: Pinterest Widget
 Plugin URI: https://github.com/ujw0l/Pinterest_widget
 Description: Pinterest RSS Widget
-Version: 3.1.0
+Version: 3.5.0
 Author: Ujwol Bastakoti
 Author URI: http://ujw0l.github.io/
 text-domain: pinterest-widget
@@ -147,7 +147,7 @@ class pinterest_widget extends WP_Widget{
 			     $pinCount =  1 <  $instance['pinterest_pin_count']  ?  $instance['pinterest_pin_count'] : '1';
 				 $buttonStyle = 'text-decoration:none;padding:5px;color:rgba(255,0,0,1); border-radius:2px;background-color:rgba(255,255,255,1);font-size:30px;';
 				 ?>
-	<fieldset class="pinterest_feed_fieldset" style="border:2px dotted  rgba(209, 2, 29,0.5);display:none;">
+	<fieldset class="pinterest_feed_fieldset" style="display:none;">
 	<legend align="center" style="overflow:hidden;"  >
 		<a id="pinterest_widget_follow" style="<?=$buttonStyle?>"   title="<?=__('Click here to follow me','pinterest-widget')?>" class='pinterest_link' href='http://pinterest.com/<?=$instance['pinterest_username']?>' target='_blank'></a>
 	</legend>			 
