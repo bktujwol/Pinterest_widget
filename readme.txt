@@ -17,9 +17,12 @@ It display random public feeds from your pins from Pinterest
 
 You now can choose any numbers of pin to display
 
+### What's Next
+Checkout out my other projects for WordPress and Javascript
 
-Note:     
+[Plugins](https://profiles.wordpress.org/ujw0l/#content-plugins) - Free plugins
 
+[JS libraries](https://www.npmjs.com/~ujw0l) - Free JS Libraries
 
 == Installation ==
 
