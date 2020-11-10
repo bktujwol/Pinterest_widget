@@ -80,5 +80,8 @@ You can use this plugin to display images on sidebar or Footer.
 * Pinterest dashicons as button
 * Better feel and look
 
+= 3.5.1 =
+*Plugin is translation ready
+
 
 
