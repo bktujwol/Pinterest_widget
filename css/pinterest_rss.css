@@ -31,7 +31,7 @@ div.pinterest__follow_icon{
   to {opacity: 1;}
 }
 div.feed_item img{
-  box-shadow: 5px 2px 25px rgba(240, 52, 52, 0.7);
+  box-shadow: 5px 2px 25px rgba(212, 45, 47, 0.5);
 }
 div.feed_item img:hover{
  

@@ -3,7 +3,7 @@
 Plugin Name: Pinterest Widget
 Plugin URI: https://github.com/ujw0l/Pinterest_widget
 Description: Pinterest RSS Widget
-Version: 3.5.0
+Version: 3.5.1
 Author: Ujwol Bastakoti
 Author URI: http://ujw0l.github.io/
 text-domain: pinterest-widget
@@ -17,12 +17,18 @@ class pinterest_widget extends WP_Widget{
 			parent::__construct(
 					'pinterest_widget', // Base ID
 					'Pinterest  Widget', // Name
-					array( 'description' => __( 'Pinterest Fedd Widget', 'pinterest-widget' ), ) // Args
+					array( 'description' => __( 'Pinterest Feed Widget', 'pinterest-widget' ), ) // Args
 			);
 			
 		}
 		
-		//function to detemine default number of pin to display
+		/**
+		 * detemine default number of pin to display
+		 * 
+		 * @param $pinCount total pin count
+		 * @param $currentPinCount Current pin count
+		 * 
+		 */
 		public function default_pin_count($pinCount,$currentPinCount){
 		    if(isset($currentPinCount))
 		    {
@@ -33,6 +39,12 @@ class pinterest_widget extends WP_Widget{
 		    }
 		}
 		
+		/**
+		 * 
+		 * Display form on bckend
+		 * 
+		 * @param $instance form data
+		 */
 		
 		public function form( $instance ) {
 			if ( isset( $instance[ 'title' ] ) ) {
@@ -44,32 +56,32 @@ class pinterest_widget extends WP_Widget{
 				}
 		?>
 		    <p>
-				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' , 'pinterest-widget' ); ?></label> 
 				
 				<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		    </p>
 		    <p>
-				<label for="<?php echo $this->get_field_id( 'pinterest_username' ); ?>"><?php _e( 'Pinterest Username:' ); ?></label> 
+				<label for="<?php echo $this->get_field_id( 'pinterest_username' ); ?>"><?php _e( 'Pinterest Username:','pinterest-widget'  ); ?></label> 
 				
 				<input class="widefat" id="<?php echo $this->get_field_id( 'pinterest_username' ); ?>" name="<?php echo $this->get_field_name( 'pinterest_username' ); ?>" type="text" value="<?php echo esc_attr( $instance['pinterest_username' ] ); ?>" />
 		    </p>
 		    <p>
-				<label for="<?php echo $this->get_field_id( 'pinterest_pin_board' ); ?>"><?php _e( 'Pin Board:' ); ?></label> 
+				<label for="<?php echo $this->get_field_id( 'pinterest_pin_board' ); ?>"><?php _e( 'Pin Board:' ,'pinterest-widget' ); ?></label> 
 				
 				<input class="widefat" id="<?php echo $this->get_field_id( 'pinterest_pin_board' ); ?>" name="<?php echo $this->get_field_name( 'pinterest_pin_board' ); ?>" type="text" value="<?php echo esc_attr( $instance['pinterest_pin_board' ] ); ?>" />
 		    </p>
 		    <p>
-				<label for="<?php echo $this->get_field_id( 'pinterest_pin_count' ); ?>"><?php _e( 'No of pins to be displayed:' ); ?></label>
+				<label for="<?php echo $this->get_field_id( 'pinterest_pin_count' ); ?>"><?php _e( 'No of pins to be displayed:','pinterest-widget'  ); ?></label>
 				<?php   if(1 < $instance['pinterest_pin_count' ] ) : $pinCount= esc_attr( $instance['pinterest_pin_count' ] ); else: $pinCount=  '1'; endif; ?> 
 				<input class="widefat" id="<?php echo $this->get_field_id( 'pinterest_pin_count' ); ?>" name="<?php echo $this->get_field_name( 'pinterest_pin_count' ); ?>" type="number" min='1' value="<?php echo esc_attr( $instance['pinterest_pin_count' ] ); ?>" />
 		    </p>
 		     <p>
         		    <ol>
         		    <b>
-        			<li>In User name enter your username.</li>
-        			<li>In board enter pin board as it is.</li>
-        			<li>If you leave board empty it will display pin based on you username.</li>
-        			<li>Do not forget to make your account public, private pin won't display.</li>
+        			<li><?=__('In User name enter your username.','pinterest-widget' )?></li>
+        			<li><?=__('In board enter pin board as it is','pinterest-widget' )?></li>
+        			<li><?=__('If you leave board empty it will display pin based on you username','pinterest-widget' )?></li>
+        			<li><?=__("Do not forget to make your account public, private pin won't display.",'pinterest-widget' )?></li>
         			</ol>
         			</b>
 		    </p>
@@ -97,14 +109,18 @@ class pinterest_widget extends WP_Widget{
 		}
 		
 		
-		//function to get contents from pinterest css
+		/**
+		 * function to get contents from pinterest css
+		 * 
+		 * @param $username Pinterest username
+		 * @param $pinCount Pinyerest board name
+		 */
 		public function process_pinterest_feed($username,$pinboard){
-			include_once( ABSPATH . WPINC . '/feed.php' );
 			// Get a SimplePie feed object from the specified feed source.
 			if(isset($pinboard)&& !empty($pinboard)){
 			    
 			    $feedurl = 'http://pinterest.com/'.$username.'/'.str_replace(' ','-',trim ($pinboard)).'.rss';
-			    //echo($feedurl);
+			    
 			}
 			else{
 		    $feedurl = 'http://pinterest.com/'.$username.'/feed.rss';
@@ -113,7 +129,9 @@ class pinterest_widget extends WP_Widget{
 			return $rss;
 		}
 		
-		//function to resgister css and javascript file
+		/**
+		 * resgister css and javascript 
+		 */
 		public function pinterest_widget_register_custom_js_css(){
 			wp_enqueue_style( 'dashicons' );
 			wp_enqueue_style('pinterestCss', plugins_url('css/pinterest_rss.css',__FILE__ ));
@@ -145,10 +163,10 @@ class pinterest_widget extends WP_Widget{
 				$feed = $this->process_pinterest_feed($instance['pinterest_username'],$instance['pinterest_pin_board']);
 				
 			     $pinCount =  1 <  $instance['pinterest_pin_count']  ?  $instance['pinterest_pin_count'] : '1';
-				 $buttonStyle = 'text-decoration:none;padding:5px;color:rgba(255,0,0,1); border-radius:2px;background-color:rgba(255,255,255,1);font-size:30px;';
+				 $buttonStyle = 'text-decoration:none;padding:5px;color:rgba(212,45,47,0,1); border-radius:2px;background-color:rgba(255,255,255,1);font-size:30px;';
 				 ?>
 	<fieldset class="pinterest_feed_fieldset" style="display:none;">
-	<legend align="center" style="overflow:hidden;"  >
+	<legend style="text-align:center;overflow:hidden;"  >
 		<a id="pinterest_widget_follow" style="<?=$buttonStyle?>"   title="<?=__('Click here to follow me','pinterest-widget')?>" class='pinterest_link' href='http://pinterest.com/<?=$instance['pinterest_username']?>' target='_blank'></a>
 	</legend>			 
 <div id='pinterest_widget_feed'  class='pinterest_feeds' data-pin-count ='<?=$pinCount?>' >
@@ -175,7 +193,9 @@ class pinterest_widget extends WP_Widget{
 		
 }
 
-/*function resgiter widget as plguin*/
+/**
+ * function resgiter widget as plguin
+ * */
 function register_pinterest_widget(){
     register_widget( "pinterest_widget" );
 }
